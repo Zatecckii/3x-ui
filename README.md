@@ -17,7 +17,7 @@
 
 > **Disclaimer:** This project is only for personal learning and communication, please do not use it for illegal purposes, please do not use it in a production environment
 
-**If this project is helpful to you, you may wish to give it a**:star2:
+**If this project is helpful to you, you may wish to give it a**🌟
 
 <p align="left">
   <a href="https://buymeacoffee.com/mhsanaei" target="_blank">
@@ -59,8 +59,8 @@ To manage SSL certificates using ACME:
    - **Get SSL:** Obtain SSL certificates.
    - **Revoke:** Revoke existing SSL certificates.
    - **Force Renew:** Force renewal of SSL certificates.
-   - **Show Existing Domains:** Display all domain certificates available on the server.  
-   - **Set Certificate Paths for the Panel:** Specify the certificate for your domain to be used by the panel. 
+   - **Show Existing Domains:** Display all domain certificates available on the server.
+   - **Set Certificate Paths for the Panel:** Specify the certificate for your domain to be used by the panel.
 
 ### Certbot
 
@@ -91,7 +91,6 @@ The management script includes a built-in SSL certificate application for Cloudf
 
 When using, just enter your `domain name`, `email`, and `API KEY`. The diagram is as follows:
    ![](media/DetailEnter.png)
-
 
 </details>
 
@@ -162,25 +161,23 @@ systemctl restart x-ui
    ```sh
    bash <(curl -sSL https://get.docker.com)
    ```
-
 2. **Clone the Project Repository:**
 
    ```sh
    git clone https://github.com/MHSanaei/3x-ui.git
    cd 3x-ui
    ```
-
 3. **Start the Service:**
 
    ```sh
    docker compose up -d
    ```
 
-  Add ```--pull always``` flag to make docker automatically recreate container if a newer image is pulled. See https://docs.docker.com/reference/cli/docker/container/run/#pull for more info.
+  Add ``--pull always`` flag to make docker automatically recreate container if a newer image is pulled. See https://docs.docker.com/reference/cli/docker/container/run/#pull for more info.
 
    **OR**
 
-   ```sh
+```sh
    docker run -itd \
       -e XRAY_VMESS_AEAD_FORCED=false \
       -v $PWD/db/:/etc/x-ui/ \
@@ -189,7 +186,7 @@ systemctl restart x-ui
       --restart=unless-stopped \
       --name 3x-ui \
       ghcr.io/mhsanaei/3x-ui:latest
-   ```
+```
 
 4. **Update to the Latest Version:**
 
@@ -199,7 +196,6 @@ systemctl restart x-ui
    docker compose pull 3x-ui
    docker compose up -d
    ```
-
 5. **Remove 3x-ui from Docker:**
 
    ```sh
@@ -212,10 +208,12 @@ systemctl restart x-ui
 </details>
 
 ## Nginx Settings
+
 <details>
   <summary>Click for Reverse Proxy Configuration</summary>
 
 #### Nginx Reverse Proxy
+
 ```nginx
 location / {
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -230,8 +228,9 @@ location / {
 ```
 
 #### Nginx sub-path
+
 - Ensure that the "URI Path" in the `/sub` panel settings is the same.
-- The `url` in the panel settings needs to end with `/`.   
+- The `url` in the panel settings needs to end with `/`.
 
 ```nginx
 location /sub {
@@ -245,6 +244,7 @@ location /sub {
     proxy_pass http://127.0.0.1:2053;
 }
 ```
+
 </details>
 
 ## Recommended OS
@@ -273,18 +273,13 @@ location /sub {
 Our platform offers compatibility with a diverse range of architectures and devices, ensuring flexibility across various computing environments. The following are key architectures that we support:
 
 - **amd64**: This prevalent architecture is the standard for personal computers and servers, accommodating most modern operating systems seamlessly.
-
 - **x86 / i386**: Widely adopted in desktop and laptop computers, this architecture enjoys broad support from numerous operating systems and applications, including but not limited to Windows, macOS, and Linux systems.
-
 - **armv8 / arm64 / aarch64**: Tailored for contemporary mobile and embedded devices, such as smartphones and tablets, this architecture is exemplified by devices like Raspberry Pi 4, Raspberry Pi 3, Raspberry Pi Zero 2/Zero 2 W, Orange Pi 3 LTS, and more.
-
 - **armv7 / arm / arm32**: Serving as the architecture for older mobile and embedded devices, it remains widely utilized in devices like Orange Pi Zero LTS, Orange Pi PC Plus, Raspberry Pi 2, among others.
-
 - **armv6 / arm / arm32**: Geared towards very old embedded devices, this architecture, while less prevalent, is still in use. Devices such as Raspberry Pi 1, Raspberry Pi Zero/Zero W, rely on this architecture.
-
 - **armv5 / arm / arm32**: An older architecture primarily associated with early embedded systems, it is less common today but may still be found in legacy devices like early Raspberry Pi versions and some older smartphones.
-
 - **s390x**: This architecture is commonly used in IBM mainframe computers and offers high performance and reliability for enterprise workloads.
+
 </details>
 
 ## Languages
@@ -301,7 +296,6 @@ Our platform offers compatibility with a diverse range of architectures and devi
 - Ukrainian
 - Turkish
 - Português (Brazil)
-
 
 ## Features
 
@@ -320,7 +314,6 @@ Our platform offers compatibility with a diverse range of architectures and devi
 - Supports changing configs by different items provided in the panel.
 - Supports export/import database from the panel
 
-
 ## Default Panel Settings
 
 <details>
@@ -331,6 +324,7 @@ Our platform offers compatibility with a diverse range of architectures and devi
 If you choose not to modify these settings, they will be generated randomly (this does not apply to Docker).
 
 **Default Settings for Docker:**
+
 - **Username:** admin
 - **Password:** admin
 - **Port:** 2053
@@ -342,24 +336,26 @@ If you choose not to modify these settings, they will be generated randomly (thi
 - **Database Path:**
   - `/etc/x-ui/x-ui.db`
 
-
 ### Web Base Path
 
 1. **Reset Web Base Path:**
+
    - Open your terminal.
    - Run the `x-ui` command.
    - Select the option to `Reset Web Base Path`.
-
 2. **Generate or Customize Path:**
-   - The path will be randomly generated, or you can enter a custom path.
 
+   - The path will be randomly generated, or you can enter a custom path.
 3. **View Current Settings:**
+
    - To view your current settings, use the `x-ui settings` command in the terminal or `View Current Settings` in `x-ui`
 
 ### Security Recommendation:
+
 - For enhanced security, use a long, random word in your URL structure.
 
 **Examples:**
+
 - `http://ip:port/*webbasepath*/panel`
 - `http://domain:port/*webbasepath*/panel`
 
@@ -403,10 +399,10 @@ To enable the IP Limit functionality, you need to install `fail2ban` and its req
    - **Fail2ban Status:** Check the status of `fail2ban`.
    - **Restart Fail2ban:** Restart the `fail2ban` service.
    - **Uninstall Fail2ban:** Uninstall Fail2ban with configuration.
-
 3. Add a path for the access log on the panel by setting `Xray Configs/log/Access log` to `./access.log` then save and restart xray.
 
 - **For versions before `v2.1.3`:**
+
   - You need to set the access log path manually in your Xray configuration:
 
     ```sh
@@ -416,8 +412,8 @@ To enable the IP Limit functionality, you need to install `fail2ban` and its req
       "loglevel": "warning"
     },
     ```
-
 - **For versions `v2.1.3` and newer:**
+
   - There is an option for configuring `access.log` directly from the panel.
 
 </details>
@@ -438,7 +434,6 @@ The web panel supports daily traffic, panel login, database backup, system statu
 - Traffic Cap Notification
 - Database Backup
 - CPU Load Notification
-
 
 **Reference syntax:**
 
@@ -468,22 +463,19 @@ The web panel supports daily traffic, panel login, database backup, system statu
 ### Setting up Telegram bot
 
 - Start [Botfather](https://t.me/BotFather) in your Telegram account:
-    ![Botfather](./media/botfather.png)
-
+  ![Botfather](./media/botfather.png)
 - Create a new Bot using /newbot command: It will ask you 2 questions, A name and a username for your bot. Note that the username has to end with the word "bot".
-    ![Create new bot](./media/newbot.png)
-
+  ![Create new bot](./media/newbot.png)
 - Start the bot you've just created. You can find the link to your bot here.
-    ![token](./media/token.png)
-
+  ![token](./media/token.png)
 - Enter your panel and config Telegram bot settings like below:
-![Panel Config](./media/panel-bot-config.png)
+  ![Panel Config](./media/panel-bot-config.png)
 
 Enter your bot token in input field number 3.
 Enter the user ID in input field number 4. The Telegram accounts with this id will be the bot admin. (You can enter more than one, Just separate them with ,)
 
 - How to get Telegram user ID? Use this [bot](https://t.me/useridinfobot), Start the bot and it will give you the Telegram user ID.
-![User ID](./media/user-id.png)
+  ![User ID](./media/user-id.png)
 
 </details>
 
@@ -498,13 +490,13 @@ Enter the user ID in input field number 4. The Telegram accounts with this id wi
 - `/login` with `POST` user data: `{username: '', password: ''}` for login
 - `/panel/api/inbounds` base for following actions:
 
-| Method | Path                               | Action                                      |
-| :----: | ---------------------------------- | ------------------------------------------- |
-| `GET`  | `"/list"`                          | Get all inbounds                            |
-| `GET`  | `"/get/:id"`                       | Get inbound with inbound.id                 |
-| `GET`  | `"/getClientTraffics/:email"`      | Get Client Traffics with email              |
-| `GET`  | `"/getClientTrafficsById/:id"`     | Get client's traffic By ID |
-| `GET`  | `"/createbackup"`                  | Telegram bot sends backup to admins         |
+|  Method  | Path                                 | Action                                      |
+| :------: | ------------------------------------ | ------------------------------------------- |
+| `GET` | `"/list"`                          | Get all inbounds                            |
+| `GET` | `"/get/:id"`                       | Get inbound with inbound.id                 |
+| `GET` | `"/getClientTraffics/:email"`      | Get Client Traffics with email              |
+| `GET` | `"/getClientTrafficsById/:id"`     | Get client's traffic By ID                  |
+| `GET` | `"/createbackup"`                  | Telegram bot sends backup to admins         |
 | `POST` | `"/add"`                           | Add inbound                                 |
 | `POST` | `"/del/:id"`                       | Delete Inbound                              |
 | `POST` | `"/update/:id"`                    | Update Inbound                              |
@@ -524,8 +516,8 @@ Enter the user ID in input field number 4. The Telegram accounts with this id wi
 - `client.id` for VMESS and VLESS
 - `client.password` for TROJAN
 - `client.email` for Shadowsocks
+- [`<img src="https://run.pstmn.io/button.svg" alt="Run In Postman" style="width: 128px; height: 32px;">`](https://app.getpostman.com/run-collection/5146551-dda3cab3-0e33-485f-96f9-d4262f437ac5?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D5146551-dda3cab3-0e33-485f-96f9-d4262f437ac5%26entityType%3Dcollection%26workspaceId%3Dd64f609f-485a-4951-9b8f-876b3f917124)
 
-- [<img src="https://run.pstmn.io/button.svg" alt="Run In Postman" style="width: 128px; height: 32px;">](https://app.getpostman.com/run-collection/5146551-dda3cab3-0e33-485f-96f9-d4262f437ac5?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D5146551-dda3cab3-0e33-485f-96f9-d4262f437ac5%26entityType%3Dcollection%26workspaceId%3Dd64f609f-485a-4951-9b8f-876b3f917124)
 </details>
 
 ## Environment Variables
@@ -535,13 +527,18 @@ Enter the user ID in input field number 4. The Telegram accounts with this id wi
 
 #### Usage
 
-| Variable       |                      Type                      | Default       |
-| -------------- | :--------------------------------------------: | :------------ |
+| Variable       |                          Type                          | Default         |
+| -------------- | :----------------------------------------------------: | :-------------- |
 | XUI_LOG_LEVEL  | `"debug"` \| `"info"` \| `"warn"` \| `"error"` | `"info"`      |
-| XUI_DEBUG      |                   `boolean`                    | `false`       |
-| XUI_BIN_FOLDER |                    `string`                    | `"bin"`       |
-| XUI_DB_FOLDER  |                    `string`                    | `"/etc/x-ui"` |
-| XUI_LOG_FOLDER |                    `string`                    | `"/var/log"`  |
+| XUI_DEBUG      |                      `boolean`                      | `false`       |
+| XUI_BIN_FOLDER |                       `string`                       | `"bin"`       |
+| XUI_DB_FOLDER  |                       `string`                       | `"/etc/x-ui"` |
+| XUI_LOG_FOLDER |                       `string`                       | `"/var/log"`  |
+| WEB_LISTEN     |                       `string`                       | `"null"`      |
+| WEB_DOMAIN     |                       `string`                       |                 |
+| WEB_PORT       |                       `string`                       |                 |
+| WEB_CERT_FILE  |                       `string`                       |                 |
+| WEB_KEY_FILE   |                       `string`                       |                 |
 
 Example:
 

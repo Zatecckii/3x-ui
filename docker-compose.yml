@@ -3,7 +3,7 @@ version: "3"
 
 services:
   3x-ui:
-    image: ghcr.io/mhsanaei/3x-ui:latest
+    image: test:latest
     container_name: 3x-ui
     hostname: yourhostname
     volumes:
@@ -11,6 +11,11 @@ services:
       - $PWD/cert/:/root/cert/
     environment:
       XRAY_VMESS_AEAD_FORCED: "false"
+      WEB_BASE_PATH: "/control/"
+      DEFAULT_USERNAME: "testadmin"
+      DEFAULT_PASSWORD: "testadmin"
     tty: true
-    network_mode: host
+    network_mode: bridge
+    ports:
+      - "2067:2067"  # Проброс порта
     restart: unless-stopped

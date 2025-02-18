@@ -44,6 +44,16 @@ func initModels() error {
 }
 
 func initUser() error {
+	username := os.Getenv("ADMIN_USERNAME")
+	if username == "" {
+		username = defaultUsername
+	}
+
+	password := os.Getenv("ADMIN_PASSWORD")
+	if password == "" {
+		password = defaultPassword
+	}
+
 	empty, err := isTableEmpty("users")
 	if err != nil {
 		log.Printf("Error checking if users table is empty: %v", err)
@@ -51,8 +61,8 @@ func initUser() error {
 	}
 	if empty {
 		user := &model.User{
-			Username:    defaultUsername,
-			Password:    defaultPassword,
+			Username:    username,
+			Password:    password,
 			LoginSecret: defaultSecret,
 		}
 		return db.Create(user).Error

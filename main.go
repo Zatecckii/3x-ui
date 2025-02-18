@@ -7,7 +7,7 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
-	_ "unsafe"
+	//"unsafe"
 
 	"x-ui/config"
 	"x-ui/database"
