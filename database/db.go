@@ -40,12 +40,12 @@ func initModels() error {
 func initUser() error {
 	username := os.Getenv("ADMIN_USERNAME")
 	if username == "" {
-		username = defaultUsername
+		username = "admin"
 	}
 
 	password := os.Getenv("ADMIN_PASSWORD")
 	if password == "" {
-		password = defaultPassword
+		password = "admin"
 	}
 
 	empty, err := isTableEmpty("users")
@@ -72,7 +72,7 @@ func initUser() error {
 		user := &model.User{
 			Username:    username,
 			Password:    password,
-			LoginSecret: defaultSecret,
+			LoginSecret: secret,
 		}
 		return db.Create(user).Error
 	}
