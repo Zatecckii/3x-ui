@@ -44,12 +44,12 @@ func initUser() error {
 		return err
 	}
 	if empty {
-		username := os.Getenv("DEFAULT_USERNAME")
+		username := os.Getenv("ADMIN_USERNAME")
 		if username == "" {
 			username = "admin"
 		}
 
-		password := os.Getenv("DEFAULT_PASSWORD")
+		password := os.Getenv("ADMIN_PASSWORD")
 		if password == "" {
 			password = "admin"
 		}
