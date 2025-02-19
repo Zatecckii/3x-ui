@@ -48,27 +48,17 @@ func initUser() error {
 		password = "admin"
 	}
 
+	secret := os.Getenv("DEFAULT_SECRET")
+	if secret == "" {
+		secret = ""
+	}
+
 	empty, err := isTableEmpty("users")
 	if err != nil {
 		log.Printf("Error checking if users table is empty: %v", err)
 		return err
 	}
 	if empty {
-		username := os.Getenv("ADMIN_USERNAME")
-		if username == "" {
-			username = "admin"
-		}
-
-		password := os.Getenv("ADMIN_PASSWORD")
-		if password == "" {
-			password = "admin"
-		}
-
-		secret := os.Getenv("DEFAULT_SECRET")
-		if secret == "" {
-			secret = ""
-		}
-
 		user := &model.User{
 			Username:    username,
 			Password:    password,
