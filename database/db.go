@@ -7,6 +7,7 @@ import (
 	"log"
 	"os"
 	"path"
+	"errors"
 
 	"x-ui/config"
 	"x-ui/database/model"
@@ -39,34 +40,39 @@ func initModels() error {
 
 func initUser() error {
 	username := os.Getenv("ADMIN_USERNAME")
-	if username == "" {
-		username = "admin"
-	}
-
 	password := os.Getenv("ADMIN_PASSWORD")
-	if password == "" {
-		password = "admin"
-	}
-
 	secret := os.Getenv("DEFAULT_SECRET")
+
 	if secret == "" {
 		secret = ""
 	}
 
-	empty, err := isTableEmpty("users")
-	if err != nil {
-		log.Printf("Error checking if users table is empty: %v", err)
-		return err
-	}
-	if empty {
-		user := &model.User{
+	var user model.User
+	err := db.Where("username = ?", "admin").First(&user).Error
+	if errors.Is(err, gorm.ErrRecordNotFound) {
+		// Если пользователя нет, создаем нового
+		if username == "" {
+			username = "admin"
+		}
+		if password == "" {
+			password = "admin"
+		}
+		user = model.User{
 			Username:    username,
 			Password:    password,
 			LoginSecret: secret,
 		}
-		return db.Create(user).Error
+		return db.Create(&user).Error
+	} else if err == nil {
+		// Если пользователь "admin" уже существует, обновляем его
+		if username != "" && password != "" {
+			user.Username = username
+			user.Password = password
+			return db.Save(&user).Error
+		}
 	}
-	return nil
+
+	return err
 }
 
 func isTableEmpty(tableName string) (bool, error) {
