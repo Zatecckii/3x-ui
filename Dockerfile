@@ -1,9 +1,9 @@
 # ========================================================
 # Stage: Builder
 # ========================================================
-FROM golang:1.23-alpine AS builder
+FROM golang:1.24-alpine AS builder
 WORKDIR /app
-ARG TARGETARCH
+ARG TARGETARCH=amd64
 
 RUN apk --no-cache --update add \
   build-base \
@@ -15,8 +15,11 @@ COPY . .
 
 ENV CGO_ENABLED=1
 ENV CGO_CFLAGS="-D_LARGEFILE64_SOURCE"
-RUN go build -ldflags "-w -s" -o build/x-ui main.go
+
+RUN dos2unix DockerInit.sh DockerEntrypoint.sh && chmod +x DockerInit.sh DockerEntrypoint.sh && ls -lah DockerInit.sh DockerEntrypoint.sh
 RUN ./DockerInit.sh "$TARGETARCH"
+
+RUN go build -ldflags "-w -s" -o build/x-ui main.go
 
 # ========================================================
 # Stage: Final Image of 3x-ui
